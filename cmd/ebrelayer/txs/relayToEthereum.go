@@ -48,21 +48,20 @@ func RelayProphecyClaimToEthereum(provider string, contractAddress common.Addres
 	sugaredLogger.Infow("Sending new ProphecyClaim to CosmosBridge.",
 		"CosmosSender", claim.CosmosSender,
 		"CosmosSenderSequence", claim.CosmosSenderSequence)
-	var claimType = 0
-	claimType, err = strconv.Atoi(claim.ClaimType)
+	claimType, err := strconv.Atoi(claim.ClaimType)
 	if err != nil {
 		sugaredLogger.Errorw("failed convert ClaimType", errorMessageKey, err.Error())
 		return err
 	}
-	var cosmosSenderSequence, e = strconv.ParseInt(string(claim.CosmosSenderSequence), 0, 64)
-	if e != nil {
-		sugaredLogger.Errorw("failed convert CosmosSenderSequence", errorMessageKey, e.Error())
-		return e
+	cosmosSenderSequence, err := strconv.ParseInt(string(claim.CosmosSenderSequence), 0, 64)
+	if err != nil {
+		sugaredLogger.Errorw("failed convert CosmosSenderSequence", errorMessageKey, err.Error())
+		return err
 	}
-	var amount, e2 = strconv.ParseInt(claim.Amount, 0, 64)
-	if e2 != nil {
-		sugaredLogger.Errorw("failed convert Amount", errorMessageKey, e2.Error())
-		return e2
+	amount, err := strconv.ParseInt(claim.Amount, 0, 64)
+	if err != nil {
+		sugaredLogger.Errorw("failed convert Amount", errorMessageKey, err.Error())
+		return err
 	}
 	tx, err := cosmosBridgeInstance.NewProphecyClaim(auth, uint8(claimType),
 		claim.CosmosSender, big.NewInt(cosmosSenderSequence), common.BytesToAddress(claim.EthereumReceiver), claim.Symbol, big.NewInt(amount))

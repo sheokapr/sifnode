@@ -297,47 +297,205 @@ func (m *Status) GetFinalClaim() string {
 	return ""
 }
 
+// OracleClaim contains data required to make an OracleClaim
+type OracleClaim struct {
+	ProphecyId string `protobuf:"bytes,1,opt,name=prophecy_id,json=prophecyId,proto3" json:"prophecy_id,omitempty"`
+	Message    []byte `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Signature  []byte `protobuf:"bytes,3,opt,name=signature,proto3" json:"signature,omitempty"`
+}
+
+func (m *OracleClaim) Reset()         { *m = OracleClaim{} }
+func (m *OracleClaim) String() string { return proto.CompactTextString(m) }
+func (*OracleClaim) ProtoMessage()    {}
+func (*OracleClaim) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dac1b931484f4203, []int{4}
+}
+func (m *OracleClaim) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *OracleClaim) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_OracleClaim.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *OracleClaim) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_OracleClaim.Merge(m, src)
+}
+func (m *OracleClaim) XXX_Size() int {
+	return m.Size()
+}
+func (m *OracleClaim) XXX_DiscardUnknown() {
+	xxx_messageInfo_OracleClaim.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_OracleClaim proto.InternalMessageInfo
+
+func (m *OracleClaim) GetProphecyId() string {
+	if m != nil {
+		return m.ProphecyId
+	}
+	return ""
+}
+
+func (m *OracleClaim) GetMessage() []byte {
+	if m != nil {
+		return m.Message
+	}
+	return nil
+}
+
+func (m *OracleClaim) GetSignature() []byte {
+	if m != nil {
+		return m.Signature
+	}
+	return nil
+}
+
+// ProphecyClaim contains data required to make a ProphecyClaim
+type ProphecyClaim struct {
+	CosmosSender         []byte `protobuf:"bytes,1,opt,name=cosmos_sender,json=cosmosSender,proto3" json:"cosmos_sender,omitempty"`
+	Symbol               string `protobuf:"bytes,2,opt,name=symbol,proto3" json:"symbol,omitempty"`
+	Amount               string `protobuf:"bytes,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	EthereumReceiver     []byte `protobuf:"bytes,4,opt,name=ethereum_receiver,json=ethereumReceiver,proto3" json:"ethereum_receiver,omitempty"`
+	ClaimType            string `protobuf:"bytes,5,opt,name=claim_type,json=claimType,proto3" json:"claim_type,omitempty"`
+	CosmosSenderSequence []byte `protobuf:"bytes,6,opt,name=cosmos_sender_sequence,json=cosmosSenderSequence,proto3" json:"cosmos_sender_sequence,omitempty"`
+}
+
+func (m *ProphecyClaim) Reset()         { *m = ProphecyClaim{} }
+func (m *ProphecyClaim) String() string { return proto.CompactTextString(m) }
+func (*ProphecyClaim) ProtoMessage()    {}
+func (*ProphecyClaim) Descriptor() ([]byte, []int) {
+	return fileDescriptor_dac1b931484f4203, []int{5}
+}
+func (m *ProphecyClaim) XXX_Unmarshal(b []byte) error {
+	return m.Unmarshal(b)
+}
+func (m *ProphecyClaim) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	if deterministic {
+		return xxx_messageInfo_ProphecyClaim.Marshal(b, m, deterministic)
+	} else {
+		b = b[:cap(b)]
+		n, err := m.MarshalToSizedBuffer(b)
+		if err != nil {
+			return nil, err
+		}
+		return b[:n], nil
+	}
+}
+func (m *ProphecyClaim) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_ProphecyClaim.Merge(m, src)
+}
+func (m *ProphecyClaim) XXX_Size() int {
+	return m.Size()
+}
+func (m *ProphecyClaim) XXX_DiscardUnknown() {
+	xxx_messageInfo_ProphecyClaim.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_ProphecyClaim proto.InternalMessageInfo
+
+func (m *ProphecyClaim) GetCosmosSender() []byte {
+	if m != nil {
+		return m.CosmosSender
+	}
+	return nil
+}
+
+func (m *ProphecyClaim) GetSymbol() string {
+	if m != nil {
+		return m.Symbol
+	}
+	return ""
+}
+
+func (m *ProphecyClaim) GetAmount() string {
+	if m != nil {
+		return m.Amount
+	}
+	return ""
+}
+
+func (m *ProphecyClaim) GetEthereumReceiver() []byte {
+	if m != nil {
+		return m.EthereumReceiver
+	}
+	return nil
+}
+
+func (m *ProphecyClaim) GetClaimType() string {
+	if m != nil {
+		return m.ClaimType
+	}
+	return ""
+}
+
+func (m *ProphecyClaim) GetCosmosSenderSequence() []byte {
+	if m != nil {
+		return m.CosmosSenderSequence
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterEnum("sifnode.oracle.v1.StatusText", StatusText_name, StatusText_value)
 	proto.RegisterType((*GenesisState)(nil), "sifnode.oracle.v1.GenesisState")
 	proto.RegisterType((*Claim)(nil), "sifnode.oracle.v1.Claim")
 	proto.RegisterType((*DBProphecy)(nil), "sifnode.oracle.v1.DBProphecy")
 	proto.RegisterType((*Status)(nil), "sifnode.oracle.v1.Status")
+	proto.RegisterType((*OracleClaim)(nil), "sifnode.oracle.v1.OracleClaim")
+	proto.RegisterType((*ProphecyClaim)(nil), "sifnode.oracle.v1.ProphecyClaim")
 }
 
 func init() { proto.RegisterFile("sifnode/oracle/v1/types.proto", fileDescriptor_dac1b931484f4203) }
 
 var fileDescriptor_dac1b931484f4203 = []byte{
-	// 461 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x92, 0xc1, 0x6e, 0xd3, 0x40,
-	0x14, 0x45, 0xed, 0x24, 0x04, 0xf5, 0x35, 0x14, 0x77, 0x40, 0xd4, 0x80, 0xea, 0x56, 0x61, 0x53,
-	0x8a, 0x64, 0x2b, 0x65, 0xc1, 0x3a, 0x89, 0xdd, 0x2a, 0x12, 0x8a, 0x22, 0x8f, 0x03, 0x08, 0x21,
-	0xcc, 0xd4, 0x9e, 0x24, 0x23, 0x39, 0x9e, 0xc8, 0x33, 0x0d, 0xe9, 0x5f, 0xf0, 0x1f, 0xfc, 0x48,
-	0x97, 0x5d, 0xb2, 0x42, 0x28, 0xf9, 0x11, 0x94, 0xb1, 0xe3, 0x56, 0xad, 0xba, 0xb3, 0xef, 0xb9,
-	0x7e, 0xf7, 0xf9, 0xe9, 0xc2, 0xbe, 0x60, 0xa3, 0x94, 0xc7, 0xd4, 0xe1, 0x19, 0x89, 0x12, 0xea,
-	0xcc, 0x5b, 0x8e, 0xbc, 0x9c, 0x51, 0x61, 0xcf, 0x32, 0x2e, 0x39, 0xda, 0x2d, 0xb0, 0x9d, 0x63,
-	0x7b, 0xde, 0x7a, 0xf5, 0x7c, 0xcc, 0xc7, 0x5c, 0x51, 0x67, 0xfd, 0x94, 0x1b, 0x9b, 0x3f, 0xa0,
-	0x71, 0x46, 0x53, 0x2a, 0x98, 0xc0, 0x92, 0x48, 0x8a, 0xde, 0xc1, 0x2e, 0x89, 0xe3, 0x8c, 0x0a,
-	0x11, 0xfe, 0x9c, 0x30, 0x49, 0x13, 0x26, 0xa4, 0xa9, 0x1f, 0x56, 0x8f, 0xb6, 0x7c, 0xa3, 0x00,
-	0x9f, 0x37, 0x3a, 0x7a, 0x03, 0x4f, 0x48, 0x3c, 0x65, 0x69, 0x58, 0x10, 0xb3, 0x72, 0xa8, 0x1f,
-	0x6d, 0xf9, 0x0d, 0x25, 0xb6, 0x73, 0xad, 0xf9, 0x1d, 0x1e, 0x75, 0x13, 0xc2, 0xa6, 0x68, 0x07,
-	0x2a, 0x2c, 0x36, 0x75, 0x65, 0xa9, 0xb0, 0x78, 0x1d, 0x35, 0x27, 0x09, 0x8b, 0x89, 0xe4, 0xd9,
-	0x9d, 0x09, 0x46, 0x09, 0x8a, 0x29, 0xc8, 0x84, 0xc7, 0x11, 0x4f, 0x25, 0x4d, 0xa5, 0x59, 0x55,
-	0x96, 0xcd, 0x6b, 0xf3, 0xb7, 0x0e, 0xe0, 0x76, 0x06, 0x19, 0x9f, 0x4d, 0x68, 0x74, 0x79, 0x2f,
-	0xe5, 0x03, 0xd4, 0x85, 0x24, 0xf2, 0x22, 0x1f, 0xbd, 0x7d, 0xf2, 0xd2, 0xbe, 0x77, 0x1a, 0x1b,
-	0x2b, 0x43, 0xa7, 0x76, 0xf5, 0xf7, 0x40, 0xf3, 0x0b, 0x3b, 0x7a, 0x0b, 0x46, 0xb4, 0xde, 0x3b,
-	0x2c, 0x77, 0x11, 0x2a, 0xba, 0xe1, 0x3f, 0x55, 0xfa, 0xa7, 0x52, 0x5e, 0x5b, 0x6f, 0xfe, 0x44,
-	0x41, 0x61, 0xd6, 0x72, 0x6b, 0xa9, 0xab, 0x1b, 0x88, 0xe6, 0x37, 0xa8, 0xe7, 0x69, 0xa8, 0x05,
-	0x35, 0x49, 0x17, 0x52, 0xad, 0xba, 0x73, 0xb2, 0xff, 0xe0, 0x5a, 0x01, 0x5d, 0x48, 0x5f, 0x59,
-	0xd1, 0x01, 0x6c, 0x8f, 0x58, 0x4a, 0x92, 0x3c, 0xa3, 0xb8, 0x15, 0x28, 0x49, 0x8d, 0x3f, 0x16,
-	0x00, 0x37, 0x1f, 0xa1, 0xd7, 0xb0, 0x87, 0x83, 0x76, 0x30, 0xc4, 0x61, 0xe0, 0x7d, 0x09, 0xc2,
-	0x61, 0x1f, 0x0f, 0xbc, 0x6e, 0xef, 0xb4, 0xe7, 0xb9, 0x86, 0x86, 0xf6, 0xe0, 0xd9, 0x6d, 0x38,
-	0xf0, 0xfa, 0x6e, 0xaf, 0x7f, 0x66, 0xe8, 0x77, 0x01, 0x1e, 0x76, 0xbb, 0x1e, 0xc6, 0x46, 0x05,
-	0xbd, 0x00, 0x74, 0x1b, 0x9c, 0xb6, 0x7b, 0x1f, 0x3d, 0xd7, 0xa8, 0x76, 0xdc, 0xab, 0xa5, 0xa5,
-	0x5f, 0x2f, 0x2d, 0xfd, 0xdf, 0xd2, 0xd2, 0x7f, 0xad, 0x2c, 0xed, 0x7a, 0x65, 0x69, 0x7f, 0x56,
-	0x96, 0xf6, 0xf5, 0x78, 0xcc, 0xe4, 0xe4, 0xe2, 0xdc, 0x8e, 0xf8, 0xd4, 0xc1, 0x6c, 0x14, 0x4d,
-	0x08, 0x4b, 0x9d, 0x4d, 0x71, 0x17, 0x9b, 0xea, 0xaa, 0xde, 0x9e, 0xd7, 0x55, 0x1f, 0xdf, 0xff,
-	0x0f, 0x00, 0x00, 0xff, 0xff, 0x66, 0xb2, 0x98, 0xa6, 0xd9, 0x02, 0x00, 0x00,
+	// 616 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x74, 0x94, 0xcf, 0x4e, 0xdb, 0x40,
+	0x10, 0xc6, 0xe3, 0x00, 0xa9, 0x32, 0x09, 0xd4, 0x6c, 0x11, 0xb8, 0x7f, 0x08, 0x28, 0x5c, 0x28,
+	0x95, 0x12, 0x41, 0x2b, 0xf5, 0x0c, 0x49, 0x40, 0x91, 0x2a, 0x8a, 0xec, 0xd0, 0x56, 0x55, 0x55,
+	0x77, 0xb1, 0x27, 0xc9, 0x4a, 0xb6, 0x37, 0xf5, 0xae, 0x53, 0xf2, 0x16, 0x7d, 0x8f, 0xbe, 0x08,
+	0x47, 0x8e, 0x3d, 0x55, 0x15, 0x48, 0x7d, 0x8e, 0xca, 0xeb, 0xb5, 0xa1, 0xa0, 0xde, 0x32, 0xbf,
+	0xef, 0xcb, 0xcc, 0xf8, 0x5b, 0x7b, 0x61, 0x5d, 0xb0, 0x61, 0xc4, 0x7d, 0x6c, 0xf3, 0x98, 0x7a,
+	0x01, 0xb6, 0xa7, 0xbb, 0x6d, 0x39, 0x9b, 0xa0, 0x68, 0x4d, 0x62, 0x2e, 0x39, 0x59, 0xd6, 0x72,
+	0x2b, 0x93, 0x5b, 0xd3, 0xdd, 0x27, 0x2b, 0x23, 0x3e, 0xe2, 0x4a, 0x6d, 0xa7, 0xbf, 0x32, 0x63,
+	0xf3, 0x0b, 0xd4, 0x8f, 0x30, 0x42, 0xc1, 0x84, 0x23, 0xa9, 0x44, 0xf2, 0x02, 0x96, 0xa9, 0xef,
+	0xc7, 0x28, 0x84, 0xfb, 0x6d, 0xcc, 0x24, 0x06, 0x4c, 0x48, 0xcb, 0xd8, 0x9c, 0xdb, 0xae, 0xda,
+	0xa6, 0x16, 0xde, 0xe7, 0x9c, 0x6c, 0xc1, 0x22, 0xf5, 0x43, 0x16, 0xb9, 0x5a, 0xb1, 0xca, 0x9b,
+	0xc6, 0x76, 0xd5, 0xae, 0x2b, 0xb8, 0x9f, 0xb1, 0xe6, 0x67, 0x58, 0xe8, 0x04, 0x94, 0x85, 0x64,
+	0x09, 0xca, 0xcc, 0xb7, 0x0c, 0x65, 0x29, 0x33, 0x3f, 0x1d, 0x35, 0xa5, 0x01, 0xf3, 0xa9, 0xe4,
+	0xf1, 0x9d, 0x0e, 0x66, 0x21, 0xe8, 0x2e, 0xc4, 0x82, 0x07, 0x1e, 0x8f, 0x24, 0x46, 0xd2, 0x9a,
+	0x53, 0x96, 0xbc, 0x6c, 0xfe, 0x30, 0x00, 0xba, 0x07, 0x27, 0x31, 0x9f, 0x8c, 0xd1, 0x9b, 0xdd,
+	0x9b, 0xf2, 0x1a, 0x2a, 0x42, 0x52, 0x99, 0x64, 0xad, 0x6b, 0x7b, 0x8f, 0x5b, 0xf7, 0xa2, 0x69,
+	0x39, 0xca, 0x70, 0x30, 0x7f, 0xf1, 0x6b, 0xa3, 0x64, 0x6b, 0x3b, 0x79, 0x0e, 0xa6, 0x97, 0xee,
+	0xed, 0x16, 0xbb, 0x08, 0x35, 0xba, 0x6e, 0x3f, 0x54, 0xfc, 0x5d, 0x81, 0x53, 0xeb, 0xcd, 0x93,
+	0x28, 0x51, 0x58, 0xf3, 0x99, 0xb5, 0xe0, 0x2a, 0x03, 0xd1, 0xfc, 0x04, 0x95, 0x6c, 0x1a, 0xd9,
+	0x85, 0x79, 0x89, 0xe7, 0x52, 0xad, 0xba, 0xb4, 0xb7, 0xfe, 0xdf, 0xb5, 0x06, 0x78, 0x2e, 0x6d,
+	0x65, 0x25, 0x1b, 0x50, 0x1b, 0xb2, 0x88, 0x06, 0xd9, 0x0c, 0x9d, 0x15, 0x28, 0xa4, 0xda, 0x37,
+	0x87, 0x50, 0x7b, 0xab, 0xfe, 0x9e, 0x25, 0xbe, 0x01, 0xb5, 0x89, 0xce, 0xc5, 0x2d, 0x42, 0x81,
+	0x1c, 0xf5, 0xfd, 0x34, 0xd5, 0x10, 0x85, 0xa0, 0x23, 0x54, 0xcd, 0xea, 0x76, 0x5e, 0x92, 0x67,
+	0x50, 0x15, 0x6c, 0x14, 0x51, 0x99, 0xc4, 0xa8, 0x1f, 0xfb, 0x06, 0x34, 0xff, 0x18, 0xb0, 0x98,
+	0x27, 0x9e, 0x8d, 0xda, 0x82, 0x45, 0x8f, 0x8b, 0x90, 0x0b, 0x57, 0x60, 0xe4, 0x63, 0xac, 0x86,
+	0xd5, 0xed, 0x7a, 0x06, 0x1d, 0xc5, 0xc8, 0x2a, 0x54, 0xc4, 0x2c, 0x3c, 0xe3, 0x81, 0x5e, 0x5d,
+	0x57, 0x29, 0xa7, 0x21, 0x4f, 0x8a, 0xb3, 0xd5, 0x55, 0xfa, 0x86, 0xa0, 0x1c, 0x63, 0x8c, 0x49,
+	0xe8, 0xc6, 0xe8, 0x21, 0x9b, 0x62, 0xac, 0x83, 0x35, 0x73, 0xc1, 0xd6, 0x9c, 0xac, 0x03, 0x64,
+	0xe7, 0x95, 0x7e, 0x07, 0xd6, 0x82, 0x6a, 0x54, 0x55, 0x64, 0x30, 0x9b, 0x20, 0x79, 0x05, 0xab,
+	0xff, 0x2c, 0xe8, 0x0a, 0xfc, 0x9a, 0x60, 0xe4, 0xa1, 0x55, 0x51, 0x0d, 0x57, 0x6e, 0x6f, 0xea,
+	0x68, 0x6d, 0x47, 0x00, 0xdc, 0x9c, 0x02, 0x79, 0x0a, 0x6b, 0xce, 0x60, 0x7f, 0x70, 0xea, 0xb8,
+	0x83, 0xde, 0x87, 0x81, 0x7b, 0x7a, 0xec, 0x9c, 0xf4, 0x3a, 0xfd, 0xc3, 0x7e, 0xaf, 0x6b, 0x96,
+	0xc8, 0x1a, 0x3c, 0xba, 0x2d, 0x9e, 0xf4, 0x8e, 0xbb, 0xfd, 0xe3, 0x23, 0xd3, 0xb8, 0x2b, 0x38,
+	0xa7, 0x9d, 0x4e, 0xcf, 0x71, 0xcc, 0x32, 0x59, 0x05, 0x72, 0x5b, 0x38, 0xdc, 0xef, 0xbf, 0xe9,
+	0x75, 0xcd, 0xb9, 0x83, 0xee, 0xc5, 0x55, 0xc3, 0xb8, 0xbc, 0x6a, 0x18, 0xbf, 0xaf, 0x1a, 0xc6,
+	0xf7, 0xeb, 0x46, 0xe9, 0xf2, 0xba, 0x51, 0xfa, 0x79, 0xdd, 0x28, 0x7d, 0xdc, 0x19, 0x31, 0x39,
+	0x4e, 0xce, 0x5a, 0x1e, 0x0f, 0xdb, 0x0e, 0x1b, 0x7a, 0x63, 0xca, 0xa2, 0x76, 0x7e, 0x13, 0x9c,
+	0xe7, 0x77, 0x81, 0xba, 0x08, 0xce, 0x2a, 0xea, 0x03, 0x7f, 0xf9, 0x37, 0x00, 0x00, 0xff, 0xff,
+	0xab, 0x9b, 0xc1, 0x9e, 0x2a, 0x04, 0x00, 0x00,
 }
 
 func (m *GenesisState) Marshal() (dAtA []byte, err error) {
@@ -512,6 +670,115 @@ func (m *Status) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	return len(dAtA) - i, nil
 }
 
+func (m *OracleClaim) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *OracleClaim) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *OracleClaim) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.Signature) > 0 {
+		i -= len(m.Signature)
+		copy(dAtA[i:], m.Signature)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Signature)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Message) > 0 {
+		i -= len(m.Message)
+		copy(dAtA[i:], m.Message)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Message)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.ProphecyId) > 0 {
+		i -= len(m.ProphecyId)
+		copy(dAtA[i:], m.ProphecyId)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.ProphecyId)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
+func (m *ProphecyClaim) Marshal() (dAtA []byte, err error) {
+	size := m.Size()
+	dAtA = make([]byte, size)
+	n, err := m.MarshalToSizedBuffer(dAtA[:size])
+	if err != nil {
+		return nil, err
+	}
+	return dAtA[:n], nil
+}
+
+func (m *ProphecyClaim) MarshalTo(dAtA []byte) (int, error) {
+	size := m.Size()
+	return m.MarshalToSizedBuffer(dAtA[:size])
+}
+
+func (m *ProphecyClaim) MarshalToSizedBuffer(dAtA []byte) (int, error) {
+	i := len(dAtA)
+	_ = i
+	var l int
+	_ = l
+	if len(m.CosmosSenderSequence) > 0 {
+		i -= len(m.CosmosSenderSequence)
+		copy(dAtA[i:], m.CosmosSenderSequence)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.CosmosSenderSequence)))
+		i--
+		dAtA[i] = 0x32
+	}
+	if len(m.ClaimType) > 0 {
+		i -= len(m.ClaimType)
+		copy(dAtA[i:], m.ClaimType)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.ClaimType)))
+		i--
+		dAtA[i] = 0x2a
+	}
+	if len(m.EthereumReceiver) > 0 {
+		i -= len(m.EthereumReceiver)
+		copy(dAtA[i:], m.EthereumReceiver)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.EthereumReceiver)))
+		i--
+		dAtA[i] = 0x22
+	}
+	if len(m.Amount) > 0 {
+		i -= len(m.Amount)
+		copy(dAtA[i:], m.Amount)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Amount)))
+		i--
+		dAtA[i] = 0x1a
+	}
+	if len(m.Symbol) > 0 {
+		i -= len(m.Symbol)
+		copy(dAtA[i:], m.Symbol)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.Symbol)))
+		i--
+		dAtA[i] = 0x12
+	}
+	if len(m.CosmosSender) > 0 {
+		i -= len(m.CosmosSender)
+		copy(dAtA[i:], m.CosmosSender)
+		i = encodeVarintTypes(dAtA, i, uint64(len(m.CosmosSender)))
+		i--
+		dAtA[i] = 0xa
+	}
+	return len(dAtA) - i, nil
+}
+
 func encodeVarintTypes(dAtA []byte, offset int, v uint64) int {
 	offset -= sovTypes(v)
 	base := offset
@@ -596,6 +863,60 @@ func (m *Status) Size() (n int) {
 		n += 1 + sovTypes(uint64(m.Text))
 	}
 	l = len(m.FinalClaim)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+
+func (m *OracleClaim) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.ProphecyId)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.Message)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.Signature)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	return n
+}
+
+func (m *ProphecyClaim) Size() (n int) {
+	if m == nil {
+		return 0
+	}
+	var l int
+	_ = l
+	l = len(m.CosmosSender)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.Symbol)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.Amount)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.EthereumReceiver)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.ClaimType)
+	if l > 0 {
+		n += 1 + l + sovTypes(uint64(l))
+	}
+	l = len(m.CosmosSenderSequence)
 	if l > 0 {
 		n += 1 + l + sovTypes(uint64(l))
 	}
@@ -1130,6 +1451,404 @@ func (m *Status) Unmarshal(dAtA []byte) error {
 				return io.ErrUnexpectedEOF
 			}
 			m.FinalClaim = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypes(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *OracleClaim) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypes
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: OracleClaim: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: OracleClaim: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ProphecyId", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ProphecyId = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Message", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Message = append(m.Message[:0], dAtA[iNdEx:postIndex]...)
+			if m.Message == nil {
+				m.Message = []byte{}
+			}
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Signature", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Signature = append(m.Signature[:0], dAtA[iNdEx:postIndex]...)
+			if m.Signature == nil {
+				m.Signature = []byte{}
+			}
+			iNdEx = postIndex
+		default:
+			iNdEx = preIndex
+			skippy, err := skipTypes(dAtA[iNdEx:])
+			if err != nil {
+				return err
+			}
+			if (skippy < 0) || (iNdEx+skippy) < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if (iNdEx + skippy) > l {
+				return io.ErrUnexpectedEOF
+			}
+			iNdEx += skippy
+		}
+	}
+
+	if iNdEx > l {
+		return io.ErrUnexpectedEOF
+	}
+	return nil
+}
+func (m *ProphecyClaim) Unmarshal(dAtA []byte) error {
+	l := len(dAtA)
+	iNdEx := 0
+	for iNdEx < l {
+		preIndex := iNdEx
+		var wire uint64
+		for shift := uint(0); ; shift += 7 {
+			if shift >= 64 {
+				return ErrIntOverflowTypes
+			}
+			if iNdEx >= l {
+				return io.ErrUnexpectedEOF
+			}
+			b := dAtA[iNdEx]
+			iNdEx++
+			wire |= uint64(b&0x7F) << shift
+			if b < 0x80 {
+				break
+			}
+		}
+		fieldNum := int32(wire >> 3)
+		wireType := int(wire & 0x7)
+		if wireType == 4 {
+			return fmt.Errorf("proto: ProphecyClaim: wiretype end group for non-group")
+		}
+		if fieldNum <= 0 {
+			return fmt.Errorf("proto: ProphecyClaim: illegal tag %d (wire type %d)", fieldNum, wire)
+		}
+		switch fieldNum {
+		case 1:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CosmosSender", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CosmosSender = append(m.CosmosSender[:0], dAtA[iNdEx:postIndex]...)
+			if m.CosmosSender == nil {
+				m.CosmosSender = []byte{}
+			}
+			iNdEx = postIndex
+		case 2:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Symbol", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Symbol = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 3:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.Amount = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 4:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field EthereumReceiver", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.EthereumReceiver = append(m.EthereumReceiver[:0], dAtA[iNdEx:postIndex]...)
+			if m.EthereumReceiver == nil {
+				m.EthereumReceiver = []byte{}
+			}
+			iNdEx = postIndex
+		case 5:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field ClaimType", wireType)
+			}
+			var stringLen uint64
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				stringLen |= uint64(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			intStringLen := int(stringLen)
+			if intStringLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + intStringLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.ClaimType = string(dAtA[iNdEx:postIndex])
+			iNdEx = postIndex
+		case 6:
+			if wireType != 2 {
+				return fmt.Errorf("proto: wrong wireType = %d for field CosmosSenderSequence", wireType)
+			}
+			var byteLen int
+			for shift := uint(0); ; shift += 7 {
+				if shift >= 64 {
+					return ErrIntOverflowTypes
+				}
+				if iNdEx >= l {
+					return io.ErrUnexpectedEOF
+				}
+				b := dAtA[iNdEx]
+				iNdEx++
+				byteLen |= int(b&0x7F) << shift
+				if b < 0x80 {
+					break
+				}
+			}
+			if byteLen < 0 {
+				return ErrInvalidLengthTypes
+			}
+			postIndex := iNdEx + byteLen
+			if postIndex < 0 {
+				return ErrInvalidLengthTypes
+			}
+			if postIndex > l {
+				return io.ErrUnexpectedEOF
+			}
+			m.CosmosSenderSequence = append(m.CosmosSenderSequence[:0], dAtA[iNdEx:postIndex]...)
+			if m.CosmosSenderSequence == nil {
+				m.CosmosSenderSequence = []byte{}
+			}
 			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
